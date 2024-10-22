@@ -129,7 +129,7 @@ namespace ProductAPI.Controllers
             return Ok(product);
         }
 
-        [HttpGet]
+        [HttpGet("getall-with-category")]
         public async Task<IActionResult> GetAllProductWithCategory()
         {
             // Ürünleri ve ilişkili kategorileri veritabanından al
