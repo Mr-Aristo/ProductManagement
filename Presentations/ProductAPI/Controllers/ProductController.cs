@@ -129,7 +129,36 @@ namespace ProductAPI.Controllers
             return Ok(product);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllProductWithCategory()
+        {
+            // Ürünleri ve ilişkili kategorileri veritabanından al
+            var productsWithCategories = await _unitOfWork.Product
+                .GetAll() // Burada ürünlerin listesi alınır
+                .Include(p => p.Category) // Ürünlerin ilişkili kategorilerini de dahil et
+                .ToListAsync();
 
+            // Eğer ürün yoksa, NotFound döndür
+            if (productsWithCategories == null || !productsWithCategories.Any())
+            {
+                return NotFound("No products found.");
+            }
+
+            // Sonuç olarak istenilen yapıyı oluştur
+            var result = productsWithCategories.Select(product => new
+            {
+                product.Id,
+                product.Name,
+                product.Price,
+                Category = product.Category != null ? new
+                {
+                    product.Category.Id,
+                    product.Category.Name
+                } : null // Kategori yoksa null döndür
+            });
+
+            return Ok(result);
+        }
 
     }
 }
