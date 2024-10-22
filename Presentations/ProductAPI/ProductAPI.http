@@ -1,0 +1,17 @@
+@ProductAPI_HostAddress = http://localhost:5016
+
+GET {{ProductAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###Create new product
+POST https://localhost:5050/api/product/
+Content-Type: application/json
+
+{
+  "name": "Sample Product",
+  "price": 199.99,
+  "categoryID": "dbc84f2b-af41-48c3-7ca7-08dcf28d5d8b" 
+}
+
+### Get products
+GET https://localhost:5050/api/product/
