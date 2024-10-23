@@ -138,13 +138,13 @@ namespace ProductAPI.Controllers
                 .Include(p => p.Category) // Ürünlerin ilişkili kategorilerini de dahil et
                 .ToListAsync();
 
-            // Eğer ürün yoksa, NotFound döndür
+           
             if (productsWithCategories == null || !productsWithCategories.Any())
             {
                 return NotFound("No products found.");
             }
 
-            // Sonuç olarak istenilen yapıyı oluştur
+            
             var result = productsWithCategories.Select(product => new
             {
                 product.Id,
@@ -154,7 +154,7 @@ namespace ProductAPI.Controllers
                 {
                     product.Category.Id,
                     product.Category.Name
-                } : null // Kategori yoksa null döndür
+                } : null 
             });
 
             return Ok(result);

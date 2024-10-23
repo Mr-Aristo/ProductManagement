@@ -14,4 +14,4 @@ Content-Type: application/json
 }
 
 ### Get products
-GET https://localhost:5050/api/product/
+GET https://localhost:5050/api/product/getall-with-category
